@@ -43,10 +43,19 @@ def create_profile(request):
 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
+# @permission_classes([])
 def get_profile(request, pk=None):
+    # user=request.user
+    # profile=Profile.objects.get(user=user.pk)
+    print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+    print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+    print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+    print("Request: ", request, "Pk: ", pk)
     if pk:
         if request.user.profile.id !=pk:
+            print('profile.id: ',request.user.profile.id)
             return Response(status=status.HTTP_403_FORBIDDEN)
+        print(request.user.profile)
         profile = get_object_or_404(Profile, pk=pk)
     else:
         profile = request.user.profile 

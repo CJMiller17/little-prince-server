@@ -16,17 +16,21 @@ Including another URLconf
 """
 from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView) 
 from django.contrib import admin
-from django.urls import path
-from . import views
+from django.urls import path, include
+from jeu_petit_prince.views import *
+from rest_framework import routers
+
+router = routers.DefaultRouter()
 
 urlpatterns = [
+    path("", include(router.urls)),
     path('admin/', admin.site.urls),
-    path("token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
-    path("refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    path("token/", TokenObtainPairView.as_view()),
+    path("refresh/", TokenRefreshView.as_view()),
     
-    path('profiles/', views.create_profile, name="create_profile"),
-    path('profiles/<int:pk>/', views.get_profile, name="get_profile"),
-    path('profiles/<int:pk>/update/', views.update_profile, name="update_profile"),
-    path('profiles/<int:pk>/delete/', views.delete_profile, name="delete_profile"),
-    path('profiles/me/', views.get_profile, name="get_own_profile"),  
+    path('profiles/create/', create_profile),
+    path('profiles/<int:pk>/', get_profile),
+    path('profiles/<int:pk>/update/', update_profile),
+    path('profiles/<int:pk>/delete/', delete_profile),
+    path('profiles/me/', get_profile),  
 ]
