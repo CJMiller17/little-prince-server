@@ -6,20 +6,29 @@ from django.contrib.auth.models import User
 from rest_framework import status
 from .serializers import *
 from .models import *
+from rest_framework.decorators import parser_classes
+from rest_framework.parsers import MultiPartParser, FormParser
 
 
 @api_view(["POST"])
 @permission_classes([])
+@parser_classes([MultiPartParser, FormParser])
 def create_profile(request):
     user = User.objects.create(username = request.data["username"])
     user.set_password(request.data["password"])
     user.save()
-
+    butterflies = request.data.get('butterflies', False)
+    if butterflies == 'yes':
+        butterflies = True
+    elif butterflies == 'no':
+        butterflies = False
+    else:
+        butterflies = False
     profile = Profile.objects.create(
         account_name = user,
         name = request.data["name"],
         profile_image = request.data.get("profile_image"),
-        butterflies = request.data.get("butterflies", False),
+        butterflies = butterflies,
         elephants = request.data.get("elephants", 0),
         games = request.data.get("games", ""),
         fav_color = request.data.get("fav_color", ""),
