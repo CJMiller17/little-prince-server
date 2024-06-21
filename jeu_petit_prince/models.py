@@ -10,10 +10,7 @@ class Profile(models.Model):
 
     butterflies = models.BooleanField(blank=True, default=False)
     elephants = models.IntegerField(blank=True, null=True)
-    games = models.TextField(blank=True, null=True)
     fav_color = models.CharField(max_length=100, blank=True, null=True)
-
-    birds_collected = models.IntegerField(blank=True, null=True)
     
     score_little_prince = models.IntegerField(blank=True, null=True)
     score_king = models.IntegerField(blank=True, null=True)
@@ -23,12 +20,6 @@ class Profile(models.Model):
     score_lamplighter = models.IntegerField(blank=True, null=True)
     score_geographer = models.IntegerField(blank=True, null=True)
     score_earth = models.IntegerField(blank=True, null=True)
-
-    total_score = models.IntegerField(blank=True, null=True)
-
-    item_1 = models.IntegerField(blank=True, null=True)
-    item_2 = models.IntegerField(blank=True, null=True)
-    item_3 = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         return self.name

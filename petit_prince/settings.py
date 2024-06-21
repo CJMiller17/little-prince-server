@@ -123,7 +123,11 @@ STORAGES = {
 
 ROOT_URLCONF = 'petit_prince.urls'
 
-CORS_ALLOWED_ORIGINS = ['http://localhost:5173', 'https://little-prince-client.vercel.app']
+CORS_ALLOWED_ORIGINS = [
+  'http://localhost:8080', 
+  'http://localhost:5173', 
+  'https://the-little-prince-returns.vercel.app'
+]
 
 CORS_ALLOW_METHODS = [
     'GET',
